@@ -24,4 +24,4 @@ python /get_notebook.py
 
 jupyter trust /import/ipython_galaxy_notebook.ipynb
 ##/monitor_traffic.sh &
-jupyter lab --port=8888 --ip=0.0.0.0
+jupyter lab --allow-root --port=8888 --ip=0.0.0.0
