@@ -24,7 +24,7 @@ RUN . /opt/conda/etc/profile.d/conda.sh && \
     conda clean -afy && \
     chmod a+w+r /opt/conda/ -R
 
-ADD ./gisstartup.sh /startup.sh
+ADD ./startup.sh /startup.sh
 #ADD ./monitor_traffic.sh /monitor_traffic.sh
 ADD ./get_notebook.py /get_notebook.py
 
