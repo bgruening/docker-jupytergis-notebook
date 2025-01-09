@@ -13,7 +13,7 @@
 # with the UID 1450 (preconfigured jupyter user) or a newly created 'galaxy' user
 # with the same UID/GID as /import.
 
-export PATH=/home/jovyan/.local/bin:$PATH
+export PATH=/opt/conda/bin:$PATH
 
 python /get_notebook.py
 
@@ -24,5 +24,4 @@ python /get_notebook.py
 
 jupyter trust /import/ipython_galaxy_notebook.ipynb
 ##/monitor_traffic.sh &
-jupyter notebook --no-browser
-
+jupyter lab --allow-root --port=8888 --ip=0.0.0.0

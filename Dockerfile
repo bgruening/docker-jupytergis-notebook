@@ -4,34 +4,27 @@
 # https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html
 # Accoring to the link above we should take scipy-notebook and add additional kernels.
 # Since Julia installation seems to be complicated we will take the Julia notebook as base and install separate kernels into separate envs
-FROM quay.io/jupyter/julia-notebook:python-3.12
+FROM ubuntu:20.04
 
 MAINTAINER Anne Fouilloux, annef@simula.no
 
-ENV DEBIAN_FRONTEND=noninteractive
+# Install basic packages
+RUN apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends wget && \
+    apt-get clean
 
-# Set channels to bioconda > conda-forge
-RUN conda config --add channels bioconda && \
-    conda config --add channels conda-forge && \
-    conda config --set channel_priority strict && \
-    conda --version
+# Install Miniforge3
+RUN wget -q -nc --no-check-certificate -P /var/tmp https://github.com/conda-forge/miniforge/releases/download/24.9.2-0/Miniforge3-24.9.2-0-Linux-x86_64.sh && \
+    bash /var/tmp/Miniforge3-24.9.2-0-Linux-x86_64.sh -b -p /opt/conda
 
-# Install python and jupyter packages
-RUN conda install --yes \ 
-    bioblend galaxy-ie-helpers \
-    biopython \
-    jupyterlab-geojson \
-    jupytergis_qgis \
-    qgis \
-    pip && \
-    ##
-    ## Now create separate environments, that are managed by nb_conda_kernels
-    ##
-    conda create -n python-kernel-3.12 --yes python=3.12 ipykernel bioblend galaxy-ie-helpers  && \
-    conda clean --all -y && \
+# Create the environment for OSU Micro-Benchmarks
+RUN . /opt/conda/etc/profile.d/conda.sh && \
+    conda install -y jupytergis qgis && \
+    conda install -y -c bioconda galaxy-ie-helpers && \
+    conda clean -afy && \
     chmod a+w+r /opt/conda/ -R
 
-ADD ./startup.sh /startup.sh
+ADD ./gisstartup.sh /startup.sh
 #ADD ./monitor_traffic.sh /monitor_traffic.sh
 ADD ./get_notebook.py /get_notebook.py
 
@@ -62,19 +55,6 @@ ENV DEBUG=false \
 # @jupyterlab/google-drive  not yet supported
 
 USER root
-
-# R pre-requisites
-RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends \
-    fonts-dejavu \
-    unixodbc \
-    unixodbc-dev \
-    r-cran-rodbc \
-    gfortran \
-    net-tools \
-    procps \
-    gcc && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # /import will be the universal mount-point for Jupyter
 # The Galaxy instance can copy in data that needs to be present to the Jupyter webserver
