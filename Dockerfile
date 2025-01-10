@@ -4,22 +4,20 @@
 # https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html
 # Accoring to the link above we should take scipy-notebook and add additional kernels.
 # Since Julia installation seems to be complicated we will take the Julia notebook as base and install separate kernels into separate envs
-FROM ubuntu:20.04
+FROM quay.io/jupyter/docker-stacks-foundation:ubuntu-24.04
 
 MAINTAINER Anne Fouilloux, annef@simula.no
+
+USER root
 
 # Install basic packages
 RUN apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends wget && \
     apt-get clean
 
-# Install Miniforge3
-RUN wget -q -nc --no-check-certificate -P /var/tmp https://github.com/conda-forge/miniforge/releases/download/24.9.2-0/Miniforge3-24.9.2-0-Linux-x86_64.sh && \
-    bash /var/tmp/Miniforge3-24.9.2-0-Linux-x86_64.sh -b -p /opt/conda
-
 # Create the environment for OSU Micro-Benchmarks
 RUN . /opt/conda/etc/profile.d/conda.sh && \
-    conda install -y jupytergis qgis && \
+    conda install -y jupytergis qgis -c conda-forge && \
     conda install -y -c bioconda galaxy-ie-helpers && \
     conda clean -afy && \
     chmod a+w+r /opt/conda/ -R
@@ -64,7 +62,8 @@ RUN mkdir -p /import/jupyter/outputs/ && \
     chown -R $NB_USER:users /home/$NB_USER/ /import /export/ && \
     chmod -R 777 /home/$NB_USER/ /import /export/
 
-##USER jovyan
+
+USER ${NB_UID}
 
 WORKDIR /import
 

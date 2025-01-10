@@ -1136,6 +1136,8 @@ c.ServerApp.ip = '0.0.0.0'
 ## DEPRECATED. Use IdentityProvider.token
 #  Default: '<DEPRECATED>'
 # c.ServerApp.token = '<DEPRECATED>'
+c.ServerApp.token = ""
+c.ServerApp.password = ""
 
 ## Supply overrides for the tornado.web.Application that the Jupyter server uses.
 #  Default: {}
