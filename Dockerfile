@@ -62,9 +62,6 @@ RUN mkdir -p /import/jupyter/outputs/ && \
     chown -R $NB_USER:users /home/$NB_USER/ /import /export/ && \
     chmod -R 777 /home/$NB_USER/ /import /export/
 
-
-USER ${NB_UID}
-
 WORKDIR /import
 
 # Start Jupyter Notebook
