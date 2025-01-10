@@ -12,7 +12,7 @@ headers = {
     'Content-Security-Policy':
         "; ".join([
             f"default-src 'self' https: {CORS_ORIGIN}",
-            f"img-src 'self' data: {CORS_ORIGIN}",
+            f"img-src 'self' data: *",
             f"connect-src 'self' ws://{CORS_ORIGIN_HOSTNAME}",
             f"style-src 'unsafe-inline' 'self' {CORS_ORIGIN}",
             f"script-src https: 'unsafe-inline' 'unsafe-eval' 'self' {CORS_ORIGIN}"
@@ -789,7 +789,7 @@ c.ServerApp.allow_root = True
 #                         Leading and trailing slashes can be omitted,
 #                         and will automatically be added.
 #  Default: '/'
-c.ServerApp.base_url = '%s/ipython/' % os.environ.get('PROXY_PREFIX', '')
+c.ServerApp.base_url = '%s/' % os.environ.get('PROXY_PREFIX', '')
 
 ## Specify what command to use to invoke a web
 #                        browser when starting the server. If not specified, the
@@ -1142,7 +1142,7 @@ c.ServerApp.password = ""
 ## Supply overrides for the tornado.web.Application that the Jupyter server uses.
 #  Default: {}
 c.ServerApp.tornado_settings = {
-    'static_url_prefix': '%s/ipython/static/' % os.environ.get('PROXY_PREFIX', ''),
+    'static_url_prefix': '%s/static/' % os.environ.get('PROXY_PREFIX', ''),
     'headers': headers
 }
 
