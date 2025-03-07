@@ -3,7 +3,7 @@ FROM quay.io/galaxy/docker-jupyter-notebook:24.12
 # Install python and jupyter packages
 RUN conda install --yes \ 
     bioblend galaxy-ie-helpers \
-    jupytergis \
+    jupytergis=0.4.2 \
     qgis && \
     conda clean --all -y && \
     chmod a+w+r /opt/conda/ -R
