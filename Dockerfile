@@ -1,9 +1,9 @@
-FROM quay.io/galaxy/docker-jupyter-notebook:24.12
+FROM quay.io/galaxy/docker-jupyter-notebook:25.04
 
 # Install python and jupyter packages
 RUN conda install --yes \ 
     bioblend galaxy-ie-helpers \
-    jupytergis=0.4.2 \
+    jupytergis=0.5.0 \
     qgis && \
     conda clean --all -y && \
     chmod a+w+r /opt/conda/ -R
