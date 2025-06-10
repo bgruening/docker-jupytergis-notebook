@@ -24,8 +24,9 @@ Usage
 
 * Run a pre-build image from docker registry
 
- ``docker run -p 7777:8888 annefou/docker-jupytergis-notebook ``  
-
+```
+docker run -p 7777:8888 quay.io/annefou/docker-jupytergis-notebook:latest
+```
 
 Environment Variables
 =====================
