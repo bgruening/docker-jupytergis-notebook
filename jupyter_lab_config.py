@@ -12,9 +12,9 @@ headers = {
     'Content-Security-Policy':
         "; ".join([
             f"default-src 'self' https: {CORS_ORIGIN}",
-            f"img-src 'self' data: blob: {CORS_ORIGIN}",
+            f"img-src 'self' data: blob: * {CORS_ORIGIN}",
             f"media-src http: https: file: blob: {CORS_ORIGIN}",
-            f"connect-src 'self' data: wss://{CORS_ORIGIN_HOSTNAME} ws://{CORS_ORIGIN_HOSTNAME} {CORS_ORIGIN}",
+            f"connect-src 'self' data: blob: ws://{CORS_ORIGIN_HOSTNAME} wss://{CORS_ORIGIN_HOSTNAME} {CORS_ORIGIN}",
             f"style-src 'unsafe-inline' 'self' {CORS_ORIGIN}",
             f"script-src https: 'unsafe-inline' 'unsafe-eval' 'self' {CORS_ORIGIN}"
         ])
