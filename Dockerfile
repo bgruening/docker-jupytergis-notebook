@@ -5,8 +5,8 @@ RUN conda install --yes \
     bioblend galaxy-ie-helpers \
     jupytergis=0.9.1 \
     qgis && \
-    conda clean --all -y && \
-    chmod a+w+r /opt/conda/ -R
+    conda clean --all -y # && \
+#    chmod a+w+r /opt/conda/ -R
 
 ADD jupyter_notebook_config.py /home/$NB_USER/.jupyter/
 ADD jupyter_lab_config.py /home/$NB_USER/.jupyter/
