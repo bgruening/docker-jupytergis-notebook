@@ -6,7 +6,7 @@ RUN conda install --yes \
     jupytergis=0.9.1 \
     qgis && \
     conda clean --all -y  && \
-    chmod a+w+r /opt/conda/ -R
+    fix-permissions /opt/conda
 
 ADD jupyter_notebook_config.py /home/$NB_USER/.jupyter/
 ADD jupyter_lab_config.py /home/$NB_USER/.jupyter/

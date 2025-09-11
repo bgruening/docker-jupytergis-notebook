@@ -15,8 +15,10 @@ headers = {
             f"img-src 'self' data: blob: * {CORS_ORIGIN}",
             f"media-src http: https: file: blob: {CORS_ORIGIN}",
             f"connect-src 'self' data: blob: ws://{CORS_ORIGIN_HOSTNAME} wss://{CORS_ORIGIN_HOSTNAME} {CORS_ORIGIN}",
+            f"worker-src 'self' blob: {CORS_ORIGIN}",
+            f"font-src 'self' data: {CORS_ORIGIN}",
             f"style-src 'unsafe-inline' 'self' {CORS_ORIGIN}",
-            f"script-src https: 'unsafe-inline' 'unsafe-eval' 'self' {CORS_ORIGIN}"
+            f"script-src https: blob: 'unsafe-inline' 'unsafe-eval' 'self' {CORS_ORIGIN}"
         ])
 }
 
