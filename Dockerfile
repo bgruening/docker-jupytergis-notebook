@@ -3,10 +3,11 @@ FROM quay.io/galaxy/docker-jupyter-notebook:25.04
 # Install python and jupyter packages
 RUN conda install --yes \ 
     bioblend galaxy-ie-helpers \
-    jupytergis=0.9.1 \
     qgis && \
     conda clean --all -y  && \
     fix-permissions /opt/conda
+
+RUN pip install jupytergis==0.9.2
 
 ADD jupyter_notebook_config.py /home/$NB_USER/.jupyter/
 ADD jupyter_lab_config.py /home/$NB_USER/.jupyter/
