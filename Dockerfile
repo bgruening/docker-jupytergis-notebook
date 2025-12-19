@@ -1,4 +1,4 @@
-FROM quay.io/galaxy/docker-jupyter-notebook:25.04
+FROM quay.io/galaxy/docker-jupyter-notebook:25.12.1
 
 # Install python and jupyter packages
 RUN conda install --yes \ 
