@@ -7,7 +7,7 @@ RUN conda install --yes \
     conda clean --all -y  && \
     fix-permissions /opt/conda
 
-RUN pip install jupytergis==0.9.2
+RUN pip install jupytergis==0.11.1
 
 ADD jupyter_notebook_config.py /home/$NB_USER/.jupyter/
 ADD jupyter_lab_config.py /home/$NB_USER/.jupyter/
