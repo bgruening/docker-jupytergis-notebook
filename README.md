@@ -50,6 +50,7 @@ Authors
 
  * Bjoern Gruening
  * Helena Rasche
+ * Anne Fouilloux
 
 History
 =======
